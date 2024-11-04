@@ -1,5 +1,7 @@
 from pico2d import load_image
 from pico2d import get_time
+
+import game_world
 #from state_machin import StateMachine
 from state_machin import *
 
@@ -17,10 +19,10 @@ class Boy:
         self.state_machine = StateMachine(self)
         self.state_machine.start(Idle)
         self.state_machine.set_transitions({
-            Idle: {time_out:Sleep, right_down:Run ,left_down:Run ,space_down:Idle,a_down:Auto_Run },
+            Idle: {time_out:Sleep, right_down:Run ,right_up:Run , left_up:Run,left_down:Run ,space_down:Idle,a_down:Auto_Run },
             Sleep:{space_down:Idle , right_down:Run ,left_down:Run ,a_down:Auto_Run},
-            Run:{right_up:Idle , left_up:Idle , space_down:Run,a_down:Auto_Run},
-            Auto_Run: {time_out:Idle }
+            Run:{right_down:Idle , left_down:Idle,right_up:Idle , left_up:Idle , space_down:Run,a_down:Auto_Run},
+            Auto_Run: {time_out:Idle, right_down:Run ,left_down:Run }
         })
 
     def update(self):
@@ -36,8 +38,12 @@ class Boy:
 
     def fire_ball(self):
         if self.action%2==0:
+            ball = Ball(self.x,self.y,-1)
+            game_world.add_object(ball,1)
             print('fireball_left')
         else:
+            ball = Ball(self.x, self.y, 1)
+            game_world.add_object(ball,1)
             print('fireball_right')
 
 class Idle:

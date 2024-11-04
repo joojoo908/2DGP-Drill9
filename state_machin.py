@@ -1,5 +1,7 @@
 
 from pico2d import *
+from ball import Ball
+
 def space_down(e):
     return e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key==SDLK_SPACE
 def a_down(e):

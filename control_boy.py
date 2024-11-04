@@ -2,6 +2,7 @@ from pico2d import *
 import random
 from grass import Grass
 from boy import Boy
+import game_world
 
 # 클래스 단위로 분리
 # Game object class here
@@ -38,23 +39,20 @@ def reset_world():
     world = []
 
     grass = Grass()
-    world.append(grass)
+    game_world.add_object(grass,0)
 
     boy = Boy()
-    world.append(boy)
+    game_world.add_object(boy,1)
 
 
 
 def update_world():
-    for o in world:
-        o.update()
-    pass
+    game_world.update()
 
 
 def render_world():
     clear_canvas()
-    for o in world:
-        o.draw()
+    game_world.render()
     update_canvas()
 
 
