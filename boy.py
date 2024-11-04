@@ -8,7 +8,7 @@ from state_machin import *
 class Boy:
     def __init__(self):
         #self.name=name
-        self.x, self.y = 400, 90
+        self.x, self.y = 400, 60
         self.frame = 0
         self.dir = 1
         self.face_dir=0;
