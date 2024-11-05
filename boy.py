@@ -8,6 +8,7 @@ from state_machin import *
 class Boy:
     def __init__(self):
         #self.name=name
+        self.item =None
         self.x, self.y = 400, 60
         self.frame = 0
         self.dir = 1
@@ -36,15 +37,17 @@ class Boy:
     def draw(self):
         self.state_machine.draw()
 
+    def set_item(self,item):
+        self.item=item
+
     def fire_ball(self):
-        if self.action%2==0:
-            ball = Ball(self.x,self.y,-1)
-            game_world.add_object(ball,1)
-            print('fireball_left')
-        else:
-            ball = Ball(self.x, self.y, 1)
-            game_world.add_object(ball,1)
-            print('fireball_right')
+        if self.item =='Ball':
+            if self.action%2==0:
+                ball = Ball(self.x,self.y,-1)
+                game_world.add_object(ball,1)
+            else:
+                ball = Ball(self.x, self.y, 1)
+                game_world.add_object(ball,1)
 
 class Idle:
     @staticmethod
@@ -121,10 +124,10 @@ class Run:
         boy.frame = (boy.frame + 1) % 8
         if boy.dir==1:
             if boy.x<800:
-                boy.x+=boy.dir*5
+                boy.x+=boy.dir
         else:
             if boy.x>0:
-                boy.x+=boy.dir*5
+                boy.x+=boy.dir
 
 
     @staticmethod
