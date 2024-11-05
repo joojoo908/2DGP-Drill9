@@ -1,4 +1,6 @@
 from pico2d import *
+import game_framework
+import title_mod
 from grass import Grass
 from boy import Boy
 import game_world
@@ -19,9 +21,9 @@ def handle_events():
                 #event_boy=1
 
         if event.type == SDL_QUIT:
-            running = False
+            game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-            running = False
+            game_framework.change_mode(title_mod)
         else:
             boy.handle_event(event)
 
